@@ -77,9 +77,6 @@ export TMPDIR=/tmp
 chroot /data/ubuntu/ /bin/su - root
 ```
 
-
-
-
 then change the file permissions to executable:
 
 ```shell
