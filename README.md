@@ -28,6 +28,8 @@ $ uname -m
 
 (e.g. `aarch64`, `armv7l`).
 
+* Example rootfs on alpine: https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/aarch64/alpine-minirootfs-3.17.0-aarch64.tar.gz
+
 ## Extracting the rootfs
 
 Any location under `/data` should be good (because it formatted as `ext4`)
@@ -60,6 +62,13 @@ mount --bind /sys /data/ubuntu/sys
 mount --bind /proc /data/ubuntu/proc
 mount --bind /dev/pts /data/ubuntu/dev/pts
 
+# When your kernel is prepared for cgroups
+#mount --type cgroup2 /data/ubuntu/sys/fs/cgroup
+
+# Some tools are relaing on a valid `/etc/fstab`
+# just copy the content from
+# `/proc/mounts` to `/data/ubuntu/etc/fstab`
+#cp /proc/mounts /data/ubuntu/etc/fstab
 
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin
 export TERM=$TERM
@@ -67,6 +76,9 @@ export TMPDIR=/tmp
 
 chroot /data/ubuntu/ /bin/su - root
 ```
+
+
+
 
 then change the file permissions to executable:
 
